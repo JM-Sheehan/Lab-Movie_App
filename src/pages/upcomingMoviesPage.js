@@ -5,15 +5,10 @@ import { getUpcomingMovies } from "../api/tmdb-api";
 import AddToWatchListButton from '../components/buttons/addToWatchList'
 import { MoviesContext } from "../contexts/moviesContext";
 const UpcomingMoviePage = () => {
-  // const [upcomingMovies, setUpcoming] = useState([]);
-  // useEffect(() => {
-  //   getUpcomingMovies().then(upcomingMovies => {
-  //     setUpcoming(upcomingMovies);
-  //   });
-  // }, [])
   const context = useContext(MoviesContext);
-  const upcomingMovies = context.upcoming;
-
+  const upcomingMovies = context.upcoming.filter((m) => {  // New
+    return !("watch" in m);
+  });
   return (
     <PageTemplate 
       title='No. Movies'
